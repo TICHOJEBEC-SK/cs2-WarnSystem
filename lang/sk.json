@@ -1,0 +1,9 @@
+﻿{
+  "MenuTitle": "Vyber hráča na varovanie",
+  "MenuNoPlayers": " {lightyellow}Na serveri momentálne nie sú žiadni hráči.",
+  "MenuNotReady": " {lightred}MenuManager Core nie je dostupný.",
+  "NoPermission": " {lightred}Nemáš oprávnenie použiť príkaz {green}!{0}{default}.",
+  "WarnBroadcast": " {green}{0}{default} bol varovaný {lightred}{1}x{default}.",
+  "WarnFeedback": " Varoval si hráča {green}{0}{default} ({lightred}{1}x{default}).",
+  "WarnTargetOffline": " {lightred}Hráč už nie je online."
+}

@@ -1,0 +1,9 @@
+﻿{
+  "MenuTitle": "Select a player to warn",
+  "MenuNoPlayers": " {lightyellow}There are currently no players on the server.",
+  "MenuNotReady": " {lightred}MenuManager Core is not available.",
+  "NoPermission": " {lightred}You don't have permission to use the command {green}!{0}{default}.",
+  "WarnBroadcast": " {green}{0}{default} has been warned {lightred}{1}x{default}.",
+  "WarnFeedback": " You have warned player {green}{0}{default} ({lightred}{1}x{default}).",
+  "WarnTargetOffline": " {lightred}The player is no longer online."
+}
