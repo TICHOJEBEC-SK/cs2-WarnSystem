@@ -20,18 +20,16 @@ All warnings are stored in **MySQL** (via **Dapper + MySqlConnector**) and when 
 the configured threshold (default: **3 warns**), a configurable punishment command (kick/ban/etc.)  
 is automatically executed.
 
-Features:
+---
+
+## 🔹 Features
+
 - Persistent warning storage in **MySQL**
 - **Configurable punishment command** with placeholders (`{steamid64}`, `{userid}`, `{username}`, `{warns}`)
 - **Active warns reset option** after punishment
 - **Admin-only warn menu** integrated with MenuManagerCS2
 - Multi-language localization (default `sk.json`)
 - Colored chat messages with placeholders
-
----
-
-## 🔹 Features
-
 - Warn any player via a simple menu command
 - Store **total warns, active warns, penalties, last warn date** in DB
 - Automatic punishment once threshold is reached
@@ -122,3 +120,4 @@ You can use the following color tags inside messages and prefixes:
 
 ## 📩 Contact
 - **Discord:** `tichotm`
+
