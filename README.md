@@ -1,4 +1,4 @@
-﻿<h1 align="center">
+<h1 align="center">
   CS2 WarnSystem
 </h1>
 
@@ -78,7 +78,7 @@ Config is generated on first run:
 ```
 
 ### 🔧 Options
-- **Language** – language file used from `lang/` folder (default `sk`)
+- **Language** – language file used from `lang/` folder (default `en`)
 - **ChatPrefix** – prefix with colors for chat messages
 - **WarnCommand** – command to open the warn menu
 - **AdminPermission** – required permission for using the command
