@@ -43,15 +43,27 @@ public class WarnService
 
         if (triggered)
         {
-            penaltyCmd = _cfg.PenaltyCommand
+            var nextTotalPenalties = rec.TotalPenalties + 1;
+            var baseMinutes = Math.Max(1, _cfg.PenaltyBaseMinutes);
+
+            int durationMinutes = _cfg.PenaltyScalingEnabled
+                ? baseMinutes * nextTotalPenalties
+                : baseMinutes;
+
+            var penaltyCmdTemplate = _cfg.PenaltyCommand ?? string.Empty;
+
+            penaltyCmd = penaltyCmdTemplate
                 .Replace("{steamid64}", steamId64.ToString())
                 .Replace("{userid}", userId.ToString())
                 .Replace("{username}", username)
-                .Replace("{warns}", rec.TotalWarns.ToString());
+                .Replace("{warns}", rec.TotalWarns.ToString())
+                .Replace("{totalpenalties}", nextTotalPenalties.ToString())
+                .Replace("{minutes}", durationMinutes.ToString());
 
-            rec.TotalPenalties += 1;
+            rec.TotalPenalties = nextTotalPenalties;
             rec.ActiveWarns = _cfg.ResetActiveWarnsAfterPenalty ? 0 : _cfg.WarnThreshold;
         }
+
 
         await _repo.UpsertAsync(rec);
 

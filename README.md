@@ -17,7 +17,7 @@
 
 A **Counter-Strike 2 plugin** for **CounterStrikeSharp** that allows admins to **warn players**.  
 All warnings are stored in **MySQL** (via **Dapper + MySqlConnector**) and when a player reaches  
-the configured threshold (default: **3 warns**), a configurable punishment command (kick/ban/etc.)  
+the configured threshold (default: **3 warns**), a configurable punishment command (kick/ban/gag/etc.)  
 is automatically executed.
 
 ---
@@ -25,7 +25,8 @@ is automatically executed.
 ## 🔹 Features
 
 - Persistent warning storage in **MySQL**
-- **Configurable punishment command** with placeholders (`{steamid64}`, `{userid}`, `{username}`, `{warns}`)
+- **Configurable punishment command** with placeholders (`{steamid64}`, `{userid}`, `{username}`, `{warns}`, `{minutes}`, `{totalpenalties}`)
+- **Dynamic penalty scaling** (e.g., 1st = 60 min, 2nd = 120 min…) – can be toggled in config
 - **Active warns reset option** after punishment
 - **Admin-only warn menu** integrated with MenuManagerCS2
 - Multi-language localization (default `sk.json`)
@@ -72,7 +73,9 @@ Config is generated on first run:
     "SslMode": "None"
   },
   "WarnThreshold": 3,
-  "PenaltyCommand": "css_kick #{userid} TEST",
+  "PenaltyScalingEnabled": true,
+  "PenaltyBaseMinutes": 60,
+  "PenaltyCommand": "css_gag #{steamid64} {minutes} 3X-WARN",
   "ResetActiveWarnsAfterPenalty": true
 }
 ```
@@ -84,8 +87,10 @@ Config is generated on first run:
 - **AdminPermission** – required permission for using the command
 - **Database** – connection settings for MySQL
 - **WarnThreshold** – how many active warns trigger punishment
+- **PenaltyScalingEnabled** – enable/disable dynamic scaling of penalty duration (true/false)
+- **PenaltyBaseMinutes** – base time in minutes (e.g., 60 → first penalty 60 min, second penalty 120 min…)
 - **PenaltyCommand** – command executed once threshold is reached  
-  (placeholders: `{steamid64}`, `{userid}`, `{username}`, `{warns}`)
+  (placeholders: `{steamid64}`, `{userid}`, `{username}`, `{warns}`, `{minutes}`, `{totalpenalties}`)
 - **ResetActiveWarnsAfterPenalty** – reset active warns after punishment (true/false)
 
 ---
@@ -120,4 +125,3 @@ You can use the following color tags inside messages and prefixes:
 
 ## 📩 Contact
 - **Discord:** `tichotm`
-

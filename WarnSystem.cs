@@ -14,9 +14,9 @@ namespace WarnSystem;
 public class WarnSystem : BasePlugin, IPluginConfig<WarnConfig>
 {
     public override string ModuleName => "WarnSystem";
-    public override string ModuleVersion => "1.0";
+    public override string ModuleVersion => "1.1";
     public override string ModuleAuthor => "TICHOJEBEC";
-    public override string ModuleDescription => "git";
+    public override string ModuleDescription => "https://github.com/TICHOJEBEC-SK/cs2-WarnSystem";
 
     private readonly PluginCapability<IMenuApi?> _menuCapability = new("menu:nfcore");
     private IMenuApi? _menuApi;

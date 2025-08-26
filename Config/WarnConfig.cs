@@ -26,8 +26,10 @@ public class WarnConfig : BasePluginConfig
     [JsonPropertyName("AdminPermission")] public string AdminPermission { get; set; } = "@css/ban";
     [JsonPropertyName("Database")] public DatabaseConfig Database { get; set; } = new();
     [JsonPropertyName("WarnThreshold")] public int WarnThreshold { get; set; } = 3;
-    [JsonPropertyName("PenaltyCommand")] public string PenaltyCommand { get; set; } = "css_kick #{userid} TEST";
-
+    [JsonPropertyName("PenaltyScalingEnabled")] public bool PenaltyScalingEnabled { get; set; } = true;
+    [JsonPropertyName("PenaltyBaseMinutes")] public int PenaltyBaseMinutes { get; set; } = 60;
+    [JsonPropertyName("PenaltyCommand")] public string PenaltyCommand { get; set; } = "css_gag #{steamid64} {minutes} Toxic {username}";
     [JsonPropertyName("ResetActiveWarnsAfterPenalty")]
     public bool ResetActiveWarnsAfterPenalty { get; set; } = true;
 }
+
