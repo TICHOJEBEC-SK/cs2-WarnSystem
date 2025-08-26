@@ -32,4 +32,3 @@ public class WarnConfig : BasePluginConfig
     [JsonPropertyName("ResetActiveWarnsAfterPenalty")]
     public bool ResetActiveWarnsAfterPenalty { get; set; } = true;
 }
-

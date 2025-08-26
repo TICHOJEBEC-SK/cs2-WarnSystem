@@ -14,7 +14,7 @@ namespace WarnSystem;
 public class WarnSystem : BasePlugin, IPluginConfig<WarnConfig>
 {
     public override string ModuleName => "WarnSystem";
-    public override string ModuleVersion => "1.1";
+    public override string ModuleVersion => "1.2";
     public override string ModuleAuthor => "TICHOJEBEC";
     public override string ModuleDescription => "https://github.com/TICHOJEBEC-SK/cs2-WarnSystem";
 
@@ -101,7 +101,7 @@ public class WarnSystem : BasePlugin, IPluginConfig<WarnConfig>
             _l["MenuTitle"],
             target =>
             {
-                var result = _warns.WarnAsync(target).GetAwaiter().GetResult();
+                var result = _warns.WarnAsync(admin, target).GetAwaiter().GetResult();
 
                 if (!result.Penalty)
                 {

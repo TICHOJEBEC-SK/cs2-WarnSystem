@@ -25,6 +25,9 @@ is automatically executed.
 ## 🔹 Features
 
 - Persistent warning storage in **MySQL**
+- **Two database tables:**
+    - `warn_system_warns` – aggregated statistics (total/active warns, penalties, last warn)
+    - `warn_system_logs` – detailed log of every warn (admin, target, timestamp)
 - **Configurable punishment command** with placeholders (`{steamid64}`, `{userid}`, `{username}`, `{warns}`, `{minutes}`, `{totalpenalties}`)
 - **Dynamic penalty scaling** (e.g., 1st = 60 min, 2nd = 120 min…) – can be toggled in config
 - **Active warns reset option** after punishment

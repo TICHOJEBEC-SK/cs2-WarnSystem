@@ -16,27 +16,40 @@ public class WarnService
         _repo = repo;
         _cfg = cfg;
     }
-
-    public async Task<WarnResult> WarnAsync(CCSPlayerController target)
+    
+    public async Task<WarnResult> WarnAsync(CCSPlayerController admin, CCSPlayerController target)
     {
+        var adminSteamId64 = admin.SteamID;
+        var adminName = string.IsNullOrWhiteSpace(admin.PlayerName) ? "Unknown" : admin.PlayerName;
+
         var steamId64 = target.SteamID;
         var userId = target.UserId;
         var username = string.IsNullOrWhiteSpace(target.PlayerName) ? "Unknown" : target.PlayerName;
-
+        
         var rec = await _repo.GetAsync(steamId64) ?? new WarnRecord
         {
-            SteamId = steamId64,
-            Username = username,
+            TargetSteamId = steamId64,
+            TargetUsername = username,
             TotalWarns = 0,
             ActiveWarns = 0,
             TotalPenalties = 0,
             LastWarn = DateTime.UtcNow
         };
-
-        rec.Username = username;
+        
+        rec.TargetUsername = username;
         rec.TotalWarns += 1;
         rec.ActiveWarns += 1;
         rec.LastWarn = DateTime.UtcNow;
+        
+        var log = new WarnLogRecord
+        {
+            AdminSteamId = adminSteamId64,
+            AdminUsername = adminName,
+            TargetSteamId = steamId64,
+            TargetUsername = username,
+            DateWarn = DateTime.UtcNow
+        };
+        await _repo.InsertLogAsync(log);
 
         var triggered = rec.ActiveWarns >= _cfg.WarnThreshold;
         string? penaltyCmd = null;
@@ -63,7 +76,6 @@ public class WarnService
             rec.TotalPenalties = nextTotalPenalties;
             rec.ActiveWarns = _cfg.ResetActiveWarnsAfterPenalty ? 0 : _cfg.WarnThreshold;
         }
-
 
         await _repo.UpsertAsync(rec);
 
