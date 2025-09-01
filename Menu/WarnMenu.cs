@@ -1,4 +1,5 @@
 ﻿using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Modules.Menu;
 using MenuManager;
 using WarnSystem.Services;
 
@@ -26,6 +27,9 @@ public static class WarnMenu
         }
 
         var menu = api.GetMenu(title);
+        
+        menu.PostSelectAction = PostSelectAction.Close;
+        menu.ExitButton = true;
 
         foreach (var p in list)
         {
@@ -35,6 +39,7 @@ public static class WarnMenu
                 if (target is { IsValid: true } && !target.IsBot && !target.IsHLTV)
                 {
                     onSelect(target);
+                    CounterStrikeSharp.API.Modules.Menu.MenuManager.CloseActiveMenu(admin);
                 }
                 else
                 {

@@ -33,13 +33,13 @@ public class WarnService
             TotalWarns = 0,
             ActiveWarns = 0,
             TotalPenalties = 0,
-            LastWarn = DateTime.UtcNow
+            LastWarn = DateTime.Now
         };
         
         rec.TargetUsername = username;
         rec.TotalWarns += 1;
         rec.ActiveWarns += 1;
-        rec.LastWarn = DateTime.UtcNow;
+        rec.LastWarn = DateTime.Now;
         
         var log = new WarnLogRecord
         {
@@ -47,7 +47,7 @@ public class WarnService
             AdminUsername = adminName,
             TargetSteamId = steamId64,
             TargetUsername = username,
-            DateWarn = DateTime.UtcNow
+            DateWarn = DateTime.Now
         };
         await _repo.InsertLogAsync(log);
 
